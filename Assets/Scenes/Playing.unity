@@ -553,9 +553,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu:
     Name: 
-    Items: []
+    MButtons: []
   MenuButton: {fileID: 7154082802731921851, guid: 4d89a8b7b45cf4c43a6c2e049235f22c,
     type: 3}
+  controller: {fileID: 1511819730}
 --- !u!114 &828512876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,8 +771,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu:
     Name: 
-    Items: []
+    MButtons: []
   MenuButton: {fileID: 0}
+  controller: {fileID: 0}
 --- !u!1 &1511819729
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,6 +805,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 828512870}
+  m_PauseGame:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1511819731
 Transform:
   m_ObjectHideFlags: 0

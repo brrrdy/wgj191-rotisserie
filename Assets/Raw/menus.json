@@ -1,17 +1,8 @@
 {
     "Name": "PauseMenu",
-    "Items": [
-        {"ResumeButton": [
-            {"Label": "Resume"},
-            {"Function": "Pause"}
-        ]},
-        {"RestartButton": [
-            {"Label": "Restart"},
-            {"Function": "RestartGame"}
-        ]},
-        {"ExitButton": [
-            {"Label": "Exit"},
-            {"Function": "ExitGame"}
-        ]}
+    "MButtons": [
+        {"ID": "ResumeButton", "Label": "Resume", "Function": "OnPause"},
+        {"ID": "RestartButton", "Label": "Restart", "Function": "RestartGame"},
+        {"ID": "ExitButton", "Label": "Exit","Function": "ExitGame"}
     ]
 }

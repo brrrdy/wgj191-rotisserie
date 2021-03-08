@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class Gameplay : MonoBehaviour
@@ -15,12 +16,18 @@ public class Gameplay : MonoBehaviour
     
     public GameObject PauseMenu;
 
+    [Header("Toggle Pause on/off")]
+    public UnityEvent m_PauseGame;
 
     // Start is called before the first frame update
     void Start()
     {
         CurrentState = GameState.Playing;
         PauseMenu.SetActive(false);
+        if (m_PauseGame == null)
+            m_PauseGame = new UnityEvent();
+
+        m_PauseGame.AddListener(OnPause);
     }
 
     // Update is called once per frame
