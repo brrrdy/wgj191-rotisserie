@@ -1,8 +1,17 @@
 {
-    "Name": "PauseMenu",
-    "MButtons": [
-        {"ID": "ResumeButton", "Label": "Resume", "Function": "OnPause"},
-        {"ID": "RestartButton", "Label": "Restart", "Function": "RestartGame"},
-        {"ID": "ExitButton", "Label": "Exit","Function": "ExitGame"}
+    "Menus": [
+        {"Name": "PauseMenu",
+        "MButtons": [
+            {"ID": "ResumeButton", "Label": "Resume", "Function": "OnPause"},
+            {"ID": "SettingsButton", "Label": "Settings", "Function": "OpenMenuSettingsMenu"},
+            {"ID": "RestartButton", "Label": "Reset", "Function": "RestartGame"},
+            {"ID": "ExitButton", "Label": "Exit Game","Function": "ExitGame"}
+        ]},
+        {"Name": "SettingsMenu",
+            "MButtons": [
+                {"ID": "VolumeButton", "Label": "Volume", "Function": "ChangeVolume"},
+                {"ID": "BackButton", "Label": "Back","Function": "OpenMenuPauseMenu"}
+            ]}
     ]
+
 }

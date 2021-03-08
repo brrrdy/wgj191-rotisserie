@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GenerateMenu : MonoBehaviour
 {
 
-    public Menu menu;
+    public MenuList AllMenus;
 
     public GameObject MenuButton;
 
@@ -18,23 +18,26 @@ public class GenerateMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("My parent is: "+ gameObject.name);
-
         var jsonString = File.ReadAllText("Assets/Raw/menus.json");
-        menu = JsonUtility.FromJson<Menu>(jsonString);
-        
-        CreateButtons(0, 40, true);
+        AllMenus = JsonUtility.FromJson<MenuList>(jsonString);
+        controller.FullMenuList = AllMenus;
+
+        //CreateButtons(0, 40, true);
+        gameObject.SetActive(false);
     }
 
     private void CreateButtons(int xOffset, int yOffset, bool vertical)
     {
-        Debug.Log("Menu Name: "+ menu.Name);
 
         int i = 0;
+
+        var menu = Array.Find<Menu>(AllMenus.Menus, n => n.Name == gameObject.name);
+
         foreach (MButton item in menu.MButtons)
         {
             
             var btn = Instantiate(MenuButton, new Vector3(i*xOffset, -i*yOffset, 0), Quaternion.identity);
+            i++;
             btn.transform.SetParent(gameObject.transform, false);
             
             TMP_Text btnText = btn.GetComponentInChildren(typeof(TMP_Text), true) as TMP_Text;
@@ -46,13 +49,21 @@ public class GenerateMenu : MonoBehaviour
             }
             btnObj.onClick.AddListener(delegate { CallGameFunction(item.Function); });
 
-            Debug.Log("Menu Item #" + (i++) + ": "+ item.ID );
+            //Debug.Log("Menu Item #" + i + ": "+ item.ID );
         }
     }
 
     void CallGameFunction(string func)
     {
-        controller.SendMessage(func);
+        var omc = "OpenMenu";
+        var ri = func.IndexOf(omc,0);
+        if (ri > -1) {
+            var newMenu = func.Remove(ri, omc.Length);
+            controller.CloseActiveMenu();
+            controller.OpenMenu(newMenu);
+        } else {
+            controller.SendMessage(func); 
+        }
     }
 
     // Update is called once per frame
@@ -60,6 +71,12 @@ public class GenerateMenu : MonoBehaviour
     {
         
     }
+}
+
+[Serializable]
+public class MenuList
+{
+    public Menu[] Menus;
 }
 
 [Serializable]
